@@ -48,7 +48,11 @@ resource "azurerm_public_ip" "pip" {
   resource_group_name = var.rg
   allocation_method   = "dynamic"
 
+ tags = {
+    Env    = "Lab",
+    Region = "East US"
 
+  }
 }
 
 
@@ -65,6 +69,32 @@ resource "azurerm_network_interface" "nic" {
     subnet_id = main_net.subnet[0].id
   }
 
+
+resource "azurerm_windows_virtual_machine" "VMs"{
+# TBC - Fetching keys from azure key vault
+name = "VM-${element(var.resources_name, count.index)}"
+resource_group_name = var.rg
+
+location = var.location
+
+network_interface_ids = network_interface_ids.nic[var.resources_name[count.index]]
+
+size = "Standard_D4_v3"
+
+os_disk {
+
+  caching = "ReadWrite"
+  storage_account_type = "StandardSSD_LRS"
+}
+
+
+ tags = {
+    Env    = "Lab",
+    Region = "East US"
+
+  }
+
+}
 
 
 
