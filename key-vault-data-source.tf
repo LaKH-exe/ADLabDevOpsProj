@@ -12,7 +12,7 @@ data "azurerm_key_vault_secret" "secret" {
 
     name = "owe"
 
-    key_vault_id = azurerm_key_vault.AKV.id
+    key_vault_id = data.azurerm_key_vault.AKV.id
 
 
 }
