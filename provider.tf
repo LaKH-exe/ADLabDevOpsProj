@@ -48,7 +48,7 @@ resource "azurerm_public_ip" "pip" {
   count               = var.number_of_resources
   name                = "pip-${element(var.resources_name, count.index)}"
   resource_group_name = var.rg
-  allocation_method   = "dynamic"
+  allocation_method   = "Dynamic"
   location = var.location
  tags = {
     Env    = "Lab",
