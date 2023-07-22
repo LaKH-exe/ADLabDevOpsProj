@@ -68,7 +68,7 @@ resource "azurerm_network_interface" "nic" {
   resource_group_name = var.rg
 
   ip_configuration {
-    subnet_id = main_net.subnet[0].id
+    subnet_id = azurerm_virtual_network.main_net.subnet[0].id
   }
 
 
