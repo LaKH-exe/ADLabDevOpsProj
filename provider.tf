@@ -38,6 +38,7 @@ resource "azurerm_virtual_network" "main_net" {
   subnet {
 
     name = "snet-ADLab"
+    address_prefix = "10.0.2.0/24"
 
   }
 }
