@@ -71,7 +71,9 @@ resource "azurerm_network_interface" "nic" {
 
 
 resource "azurerm_windows_virtual_machine" "VMs"{
-# TBC - Fetching keys from azure key vault
+# get the admin pass from key vault
+admin_username = "owa"
+admin_password = data.azurerm_key_vault_secret.secret.value
 name = "VM-${element(var.resources_name, count.index)}"
 resource_group_name = var.rg
 
