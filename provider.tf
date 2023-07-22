@@ -4,18 +4,19 @@
 terraform {
   required_providers {
     azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "3.65.0"
+      source = "hashicorp/azurerm"
+      version = "3.66.0"
     }
   }
 }
 
 provider "azurerm" {
   # Configuration options
+
 }
 
 # create the resource group
-resource "azurerem_resource_group" "main_rg" {
+resource "azurerm_resource_group" "main_rg" {
 
   name     = var.rg
   location = var.location
