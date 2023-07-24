@@ -137,8 +137,8 @@ resource "azurerm_windows_virtual_machine" "VMs" {
 
     publisher = "MicrosoftWindowsServer"
     offer     = "WindowsServer"
-    sku       = "2016-Datacenter"
-    version   = "latest" # Changed this line to use latest instead of la, which was incomplete and invalid
+    sku       = "2019-Datacenter"
+    version   = "latest" 
 
   }
 }
