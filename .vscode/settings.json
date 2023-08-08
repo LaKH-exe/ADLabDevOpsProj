@@ -1,0 +1,7 @@
+{
+    "yaml.schemas": {
+        "file:///c%3A/Users/labib.khanfar/.vscode/extensions/docsmsft.docs-yaml-0.2.9/out/yaml-support/toc.schema.json": "/toc\\.yml/i",
+        "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/inventory.json": "file:///e%3A/ADLabDevOpsProj/ansible/azure_rm_inventory.yaml"
+    },
+    "ansible.python.interpreterPath": "c:\\Users\\labib.khanfar\\AppData\\Local\\Microsoft\\WindowsApps\\python3.10.exe"
+}

@@ -1,0 +1,16 @@
+plugin: azure.azcollection.azure_rm
+
+
+auth_source: cli
+
+
+include_vm_resource_groups:
+- rg_ADLab
+
+conditional_groups:
+
+
+DC: "tag.type == 'DC'"
+Client: "tag.type == 'Client'"
+
+
