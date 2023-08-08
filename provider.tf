@@ -134,11 +134,19 @@ resource "azurerm_windows_virtual_machine" "VMs" {
   }
 
   source_image_reference {
+    publisher = var.resources_name[count.index] == "DC" ? "MicrosoftWindowsServer" : "MicrosoftWindowsDesktop"
+    offer     = var.resources_name[count.index] == "DC" ? "WindowsServer" : "windows10preview"
+    sku       = var.resources_name[count.index] == "DC" ? "2019-Datacenter" : "win10-22h2-pro"
+    version   = "latest"
+  }
 
-    publisher = "MicrosoftWindowsServer"
-    offer     = "WindowsServer"
-    sku       = "2019-Datacenter"
-    version   = "latest" 
+
+   tags = {
+    Env    = "Lab",
+    Region = "East US"
+    Type = var.resources_name[count.index] == "DC" ? "DC" : "Client"
+
+
 
   }
 }
