@@ -26,8 +26,8 @@ resource "azurerm_resource_group" "main_rg" {
 resource "azurerm_virtual_network" "main_net" {
 
   name                = "vnet-ADLab"
-  resource_group_name = var.rg
-  address_space       = ["10.0.0.0/24"]
+  resource_group_name = azurerm_resource_group.main_rg.name
+  address_space       = ["10.0.0.0/16"]
   location            = var.location
   tags = {
     Env    = "Lab",
@@ -38,7 +38,7 @@ resource "azurerm_virtual_network" "main_net" {
   subnet {
 
     name           = "snet-ADLab"
-    address_prefix = "10.0.2.0/24"
+    address_prefix = "10.0.0.0/24"
 
   }
 }
@@ -47,7 +47,7 @@ resource "azurerm_virtual_network" "main_net" {
 resource "azurerm_public_ip" "pip" {
   count               = var.number_of_resources
   name                = "pip-${element(var.resources_name, count.index)}"
-  resource_group_name = var.rg
+  resource_group_name = azurerm_resource_group.main_rg.name
   allocation_method   = "Dynamic"
   location            = var.location
   tags = {
@@ -65,7 +65,7 @@ resource "azurerm_network_interface" "nic" {
   name  = "nic-${element(var.resources_name, count.index)}"
 
   location            = var.location
-  resource_group_name = var.rg
+  resource_group_name = azurerm_resource_group.main_rg.name
 
   ip_configuration {
     name                          = "internal"
@@ -78,7 +78,7 @@ resource "azurerm_network_interface" "nic" {
 resource "azurerm_network_security_group" "main-nsg" {
   name                = "main-nsg"
   location            = var.location
-  resource_group_name = var.rg
+  resource_group_name = azurerm_resource_group.main_rg.name
   count               = var.number_of_resources
   # RDP
   security_rule {
@@ -119,7 +119,7 @@ resource "azurerm_windows_virtual_machine" "VMs" {
   admin_username      = "owa"
   admin_password      = data.azurerm_key_vault_secret.secret.value
   name                = "VM-${element(var.resources_name, count.index)}"
-  resource_group_name = var.rg
+  resource_group_name = azurerm_resource_group.main_rg.name
 
   location              = var.location
   network_interface_ids = [element(azurerm_network_interface.nic.*.id, count.index)] # Removed the square brackets around the element function
