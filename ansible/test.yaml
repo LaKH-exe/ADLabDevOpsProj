@@ -1,0 +1,6 @@
+- name: test configure domain controller
+  host: DC
+  tasks:
+    - name: create a test file
+      path: C:\hello.txt
+      state: touch
