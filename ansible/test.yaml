@@ -1,6 +1,8 @@
-- name: test configure domain controller
-  host: DC
+---
+- name: Configure domain controllers
+  hosts: DC
   tasks:
-    - name: create a test file
+  - name: Create test file
+    win_file:
       path: C:\hello.txt
       state: touch
