@@ -71,6 +71,7 @@ resource "azurerm_network_interface" "nic" {
     name                          = "internal"
     subnet_id                     = tolist(azurerm_virtual_network.main_net.subnet)[0].id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id = element(azurerm_public_ip.pip.*.name, count.index)
   }
 }
 
