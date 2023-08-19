@@ -1,7 +1,8 @@
 - name: Set up DC
   hosts: DC
   vars_files:
-    - /vars/creds.yaml
+    - ./vars/creds.yaml
+    - ./vars/vars.yaml
 
   
 
@@ -13,7 +14,7 @@
       safe_mode_password: "{{SafeModePass}}"
     register: domain_install
   - name: reboot after creating the domain
-    win_reboot: ()
+    win_reboot:
     when: domain_install.reboot_required
 
 
@@ -22,11 +23,13 @@
       dns_domain_name: "{{domain_name}}"
       domain_admin_user: "{{domain_admin}}"
       domain_admin_password: "{{domain_admin_pass}}"
+      safe_mode_password: "{{SafeModePass}}"
       state: domain_controller
     register: to_dc
 
   - name: reboot after promotion
-    win_reboot: ()
+    win_reboot: 
     when: to_dc.reboot_required
+    
 
   
