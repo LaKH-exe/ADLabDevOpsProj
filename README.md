@@ -13,3 +13,4 @@ I needed a way to easily create my lab enviroment after testing and messing up t
 ### Future Plan:
 - Find a way to hybrid join the devices to AAD in IaC. Need to automate AD connect settings.
 - Onborad devices to defender.
+- Handle the ansible secrets in a better way.
